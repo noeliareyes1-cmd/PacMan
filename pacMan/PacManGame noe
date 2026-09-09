@@ -1,0 +1,64 @@
+package edu.upb.lp.game.pacMan;
+
+public class PacManGame {
+	private int filas = 18;
+    private int columnas = 32;
+	private int[][] mapa = new int[filas][columnas];
+	private PacMan Pacman;
+	private PacManController controller;
+
+	public PacManGame(PacManController controller) {
+        this.controller = controller; 
+        this.Pacman = new PacMan(10, 15,this);
+        Mapa();
+    }
+
+	public void Mapa() {
+		for (int r = 0; r < filas; r++) {
+            for (int c = 0; c < columnas; c++) {
+                mapa[r][c] = 0; 
+            }
+		}
+		// 0 = pared; 1= camino vacio; 2= camino lleno
+	}
+	public void moverArriba() {
+        Pacman.moverArriba();
+    }
+
+    public void moverDerecha() {
+        Pacman.moverDerecha();
+    }
+
+    public void moverAbajo() {
+        Pacman.moverAbajo();
+    }
+
+    public void moverIzquierda() {
+        Pacman.moverIzquierda();
+    }
+	public void dibujarPacman(int filas, int columnas, int direccion) {
+		controller.dibujarPacman(filas, columnas, direccion);
+	}
+
+	public void borrarPacman(int filas, int columnas) {
+		controller.borrarPacman(filas, columnas);
+
+	}
+
+	public void moverPacman(int direccion) {
+        controller.borrarPacman(Pacman.getFilas(), Pacman.getColumnas());
+        Pacman.mover(direccion, filas, columnas);
+        controller.dibujarPacman(Pacman.getFilas(), Pacman.getColumnas(), Pacman.getDireccion());
+    }
+	public PacMan getPacman() {
+        return Pacman;
+    }
+
+    public int getFilas() {
+        return filas;
+    }
+
+    public int getColumnas() {
+        return columnas;
+    }
+}
