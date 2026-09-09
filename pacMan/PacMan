@@ -1,21 +1,22 @@
 package edu.upb.lp.game.pacMan;
 
 public class PacMan {
-	private int direccion = 0;// 0= arriba,1= derecha, 2= abajo, 3= izquierda
-	private int filas = 10;
-	private int columnas = 15;
-	private  PacManGame game;
-	private PacManGame PacManGame;
-	
-	public PacMan(int filas, int columnas) {
+	private int direccion = 1;// 0= arriba,1= derecha, 2= abajo, 3= izquierda
+	private int filas;
+	private int columnas;
+	private PacManGame game;
+
+	public PacMan(int filas, int columnas, PacManGame game) {
 
 		this.filas = filas;
 		this.columnas = columnas;
-		this.PacManGame = game;
+		this.game = game;
 	}
+
 	public int getDireccion() {
 		return direccion;
 	}
+
 	public int getFilas() {
 		return filas;
 	}
@@ -26,23 +27,42 @@ public class PacMan {
 
 	public void borrarPacman(int filas, int columnas) {
 		game.borrarPacman(filas, columnas);
-	}	
-	
-	public void MoverDerecha() {
-//		game.borrarPacman(filas, columnas);
-		if (columnas + 1 < 32) {
+	}
+
+	public void moverArriba() {
+		game.borrarPacman(filas, columnas);
+		if (filas - 1 >= 0) {
+			filas--;
+			direccion = 0;
+		}
+		game.dibujarPacman(filas, columnas, direccion);
+	}
+
+	public void moverDerecha() {
+		game.borrarPacman(filas, columnas);
+		if (columnas + 1 < game.getColumnas()) {
 			columnas++;
 			direccion = 1;
 		}
 		game.dibujarPacman(filas, columnas, direccion);
 	}
-	public void MoverIzquierda() {
-//		game.borrarPacman(filas, columnas);
-		if (columnas + 1 < 32) {
-			columnas--;
-			direccion = 3 ;
+
+	public void moverAbajo() {
+		game.borrarPacman(filas, columnas);
+		if (filas + 1 < game.getFilas()) {
+			filas++;
+			direccion = 2;
 		}
 		game.dibujarPacman(filas, columnas, direccion);
 	}
 
+	public void moverIzquierda() {
+		game.borrarPacman(filas, columnas);
+		if (columnas - 1 >= 0) {
+			columnas--;
+			direccion = 3;
+		}
+		game.dibujarPacman(filas, columnas, direccion);
 	}
+
+}
